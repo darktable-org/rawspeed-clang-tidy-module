@@ -1,0 +1,18 @@
+master:
+  steps:
+    - trigger_services:
+        project: graphics:darktable:master
+        package: rawspeed-clang-tidy-module
+  filters:
+    event: push
+    branches:
+      only:
+        - master
+pr:
+  steps:
+    - branch_package:
+        source_project: graphics:darktable:master
+        source_package: rawspeed-clang-tidy-module
+        target_project: graphics:darktable:github
+  filters:
+    event: pull_request
