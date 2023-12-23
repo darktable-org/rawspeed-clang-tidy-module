@@ -1,0 +1,5 @@
+rawspeed-clang-tidy-module (17.0.0) unstable; urgency=medium
+
+  * Initial package
+
+ -- Roman Lebedev <lebedev.ri@gmail.com>  Sat, 23 Dec 2023 19:37:35 +0300

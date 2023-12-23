@@ -1,0 +1,39 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+
+DEB_BUILD_OPTIONS += nocheck
+
+LLVM_VERSION = 17
+
+CC = clang-$(LLVM_VERSION)
+CXX = clang++-$(LLVM_VERSION)
+
+CFLAGS =
+
+# DWZ supports, at most, DWARF4, while the default is DWARF5.
+CFLAGS += -fdebug-default-version=4
+
+CFLAGS += $(STAGE_COMPILE_FLAGS)
+
+CFLAGS += -fuse-ld=lld-$(LLVM_VERSION) -Wl,--build-id=sha1
+
+CXXFLAGS = $(CFLAGS)
+
+%:
+	dh $@ --buildsystem=cmake+ninja
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	-DCMAKE_C_COMPILER=$(CC) \
+	-DCMAKE_CXX_COMPILER=$(CXX) \
+	-DCMAKE_C_FLAGS="$(CFLAGS)" \
+	-DCMAKE_CXX_FLAGS="$(CXXFLAGS)" \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DBUILD_SHARED_LIBS=ON
+
+override_dh_auto_install:
+	dh_auto_install --destdir=debian/tmp/
+
+override_dh_install:
+	dh_install --sourcedir=debian/tmp/
