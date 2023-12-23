@@ -1,5 +1,14 @@
 master:
   steps:
+    - configure_repositories:
+        project: OBS:Server:Unstable:CI
+        repositories:
+          - name: Debian_Testing
+            architectures:
+              - x86_64
+          - name: Debian_Unstable
+            architectures:
+              - x86_64
     - trigger_services:
         project: graphics:darktable:master
         package: rawspeed-clang-tidy-module
