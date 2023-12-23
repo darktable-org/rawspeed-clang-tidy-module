@@ -14,15 +14,5 @@ pr:
         source_project: graphics:darktable:master
         source_package: rawspeed-clang-tidy-module
         target_project: graphics:darktable:github
-        add_repositories: disable
-    - configure_repositories:
-        project: graphics:darktable:github
-        repositories:
-          - name: Debian_Testing
-            architectures:
-              - x86_64
-          - name: Debian_Unstable
-            architectures:
-              - x86_64
   filters:
     event: pull_request
