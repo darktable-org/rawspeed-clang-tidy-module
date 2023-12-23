@@ -41,3 +41,43 @@ include(${Clang_DIR}/AddClang.cmake)
 add_subdirectory(src)
 
 feature_summary(WHAT ALL)
+
+#-------------------------------------------------------------------------------
+
+set(generated_dir "${PROJECT_BINARY_DIR}")
+
+set(version_config "${generated_dir}/${PROJECT_NAME}ConfigVersion.cmake")
+set(project_config "${generated_dir}/${PROJECT_NAME}Config.cmake")
+set(targets_to_export clangTidyRawSpeedModule)
+set(targets_export_name "${PROJECT_NAME}Targets")
+
+set(namespace "${PROJECT_NAME}::")
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+  ${PROJECT_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in
+  ${project_config}
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
+  NO_SET_AND_CHECK_MACRO
+  NO_CHECK_REQUIRED_COMPONENTS_MACRO
+)
+
+write_basic_package_version_file(
+  "${version_config}" VERSION ${GENERIC_LIB_VERSION} COMPATIBILITY SameMajorVersion
+)
+
+export(TARGETS ${targets_to_export}
+       NAMESPACE "${namespace}"
+       FILE ${generated_dir}/${targets_export_name}.cmake)
+
+install(TARGETS ${targets_to_export}
+        EXPORT ${targets_export_name}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+install(FILES "${project_config}" "${version_config}"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+
+install(EXPORT "${targets_export_name}"
+        NAMESPACE "${namespace}"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
