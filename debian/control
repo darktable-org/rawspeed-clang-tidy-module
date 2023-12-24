@@ -4,11 +4,13 @@ Priority: optional
 Maintainer: Roman Lebedev <lebedev.ri@gmail.com>
 Build-Depends: debhelper-compat (= 13),
                cmake,
-               ninja-build,
                clang-17,
-               llvm-17-dev,
+               clang-tidy-17,
                libclang-17-dev,
-               lld-17
+               lld-17,
+               llvm-17-dev,
+               ninja-build,
+               python3
 Standards-Version: 4.6.0
 Homepage: https://github.com/darktable-org/rawspeed-clang-tidy-module
 Vcs-Browser: https://github.com/darktable-org/rawspeed-clang-tidy-module

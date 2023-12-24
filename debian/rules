@@ -2,8 +2,6 @@
 
 include /usr/share/dpkg/architecture.mk
 
-DEB_BUILD_OPTIONS += nocheck
-
 LLVM_VERSION = 17
 
 CC = clang-$(LLVM_VERSION)
