@@ -38,9 +38,20 @@ find_package(Clang 17.0.0...<18.0.0 REQUIRED CONFIG)
 include(${LLVM_DIR}/AddLLVM.cmake)
 include(${Clang_DIR}/AddClang.cmake)
 
+enable_testing()
+
 add_subdirectory(src)
+add_subdirectory(test)
 
 feature_summary(WHAT ALL)
+
+configure_file("${CMAKE_SOURCE_DIR}/clang-tidy.in"
+               "${CMAKE_BINARY_DIR}/clang-tidy.in" @ONLY)
+
+file(GENERATE
+     OUTPUT "${CMAKE_BINARY_DIR}/clang-tidy"
+     INPUT  "${CMAKE_BINARY_DIR}/clang-tidy.in"
+     USE_SOURCE_PERMISSIONS)
 
 #-------------------------------------------------------------------------------
 
