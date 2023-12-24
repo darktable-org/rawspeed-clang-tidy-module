@@ -42,6 +42,14 @@ add_subdirectory(src)
 
 feature_summary(WHAT ALL)
 
+configure_file("${CMAKE_SOURCE_DIR}/clang-tidy.in"
+               "${CMAKE_BINARY_DIR}/clang-tidy.in" @ONLY)
+
+file(GENERATE
+     OUTPUT "${CMAKE_BINARY_DIR}/clang-tidy"
+     INPUT  "${CMAKE_BINARY_DIR}/clang-tidy.in"
+     USE_SOURCE_PERMISSIONS)
+
 #-------------------------------------------------------------------------------
 
 set(generated_dir "${PROJECT_BINARY_DIR}")
