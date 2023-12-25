@@ -7,7 +7,7 @@ set(LLVM_LINK_COMPONENTS
   )
 
 add_clang_library(clangTidyRawSpeedModule
-  HelloWorldCheck.cpp
+  StdArrayNoOperatorAtCheck.cpp
   RawSpeedTidyModule.cpp
 
   LINK_LIBS

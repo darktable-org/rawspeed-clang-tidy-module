@@ -10,7 +10,7 @@
 #include <clang-tidy/ClangTidyModule.h>
 #include <clang-tidy/ClangTidyModuleRegistry.h>
 
-#include "HelloWorldCheck.h"
+#include "StdArrayNoOperatorAtCheck.h"
 
 using namespace clang::ast_matchers;
 
@@ -21,7 +21,8 @@ namespace rawspeed {
 class RawSpeedModule : public ClangTidyModule {
 public:
   void addCheckFactories(ClangTidyCheckFactories &CheckFactories) override {
-    CheckFactories.registerCheck<HelloWorldCheck>("rawspeed-hello-world");
+    CheckFactories.registerCheck<StdArrayNoOperatorAtCheck>(
+        "rawspeed-std-array-no-operator-at");
   }
 };
 
