@@ -10,6 +10,7 @@
 #include <clang-tidy/ClangTidyModule.h>
 #include <clang-tidy/ClangTidyModuleRegistry.h>
 
+#include "NoStdOptionalCheck.h"
 #include "StdArrayNoOperatorAtCheck.h"
 
 using namespace clang::ast_matchers;
@@ -21,6 +22,8 @@ namespace rawspeed {
 class RawSpeedModule : public ClangTidyModule {
 public:
   void addCheckFactories(ClangTidyCheckFactories &CheckFactories) override {
+    CheckFactories.registerCheck<NoStdOptionalCheck>(
+        "rawspeed-no-std-optional");
     CheckFactories.registerCheck<StdArrayNoOperatorAtCheck>(
         "rawspeed-std-array-no-operator-at");
   }
