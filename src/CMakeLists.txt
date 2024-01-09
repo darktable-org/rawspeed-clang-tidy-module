@@ -7,6 +7,7 @@ set(LLVM_LINK_COMPONENTS
   )
 
 add_clang_library(clangTidyRawSpeedModule
+  NoStdOptionalCheck.cpp
   StdArrayNoOperatorAtCheck.cpp
   RawSpeedTidyModule.cpp
 
